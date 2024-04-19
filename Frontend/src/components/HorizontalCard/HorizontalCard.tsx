@@ -13,7 +13,9 @@ export type Repository = {
 
 type HorizontalCardProps = {
     repo: Repository;
-};
+    onClick: (repoId: number) => void; 
+  };
+  
 
 const HorizontalCard = ({ repo }: HorizontalCardProps) => {
     return (

@@ -2,29 +2,42 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../features/store';
 import HorizontalCard from '../HorizontalCard/HorizontalCard';
-import { Repository } from '../HorizontalCard/HorizontalCard';
-import './CardsContainer.css'
+import './CardsContainer.css';
 
-const CardsContainer = () => {
-  const repositories = useSelector((state: RootState) => state.repository.data); 
-  const midIndex = Math.ceil(repositories.length / 2); 
+type CardsContainerProps = {
+  onClick: (repoId: number) => void; 
+};
 
-  const leftColumn = repositories.slice(0, midIndex); 
-  const rightColumn = repositories.slice(midIndex); 
+const CardsContainer = ({ onClick }: CardsContainerProps) => {
+  const repositories = useSelector((state: RootState) => state.repository.data);
+  const repositoryLoading = useSelector((state: RootState) => state.repository.loading);
+  const userLoading = useSelector((state: RootState) => state.user.loading);
+
+  const loading = repositoryLoading || userLoading;
+
+  const halfLength = Math.ceil(repositories.length / 2);
+  const leftColumn = repositories.slice(0, halfLength);
+  const rightColumn = repositories.slice(halfLength);
 
   return (
     <div className="repositories-container">
-      <h2>Repositories</h2>
+      <h2>{loading && 'Loading Info'}</h2>
       <div className="repositories">
         <div className="left-column">
-          {leftColumn.map((repo) => (
-            <HorizontalCard key={repo.id} repo={repo} />
-          ))}
+          {loading ? (
+            <p>Loading repositories...</p>
+          ) : (
+            leftColumn.map((repo) => (
+              <HorizontalCard key={repo.id} repo={repo} onClick={() => onClick(repo.id)} /> 
+            ))
+          )}
         </div>
         <div className="right-column">
-          {rightColumn.map((repo) => (
-            <HorizontalCard key={repo.id} repo={repo} />
-          ))}
+          {loading ? null : (
+            rightColumn.map((repo) => (
+              <HorizontalCard key={repo.id} repo={repo} onClick={() => onClick(repo.id)} /> 
+            ))
+          )}
         </div>
       </div>
     </div>

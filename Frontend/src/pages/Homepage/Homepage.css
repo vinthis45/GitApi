@@ -1,0 +1,32 @@
+.header{
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+
+.user-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+  margin-bottom: 10px;
+  text-align: start;
+  padding: 10px;
+  margin-top: 20px !important;
+  width: 500px;
+  margin: auto;
+}
+
+.user-info{
+    display: flex;
+    padding: 10px;
+}
+
+.user-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
