@@ -1,0 +1,17 @@
+.repositories-container {
+    margin-top: 20px; 
+    text-align: center;
+  }
+  
+  .repositories {
+    display: flex;
+    padding: 20px;
+  }
+
+  .left-column{
+    padding: 20px;
+  }
+
+  .right-column{
+    padding: 20px;
+      }
